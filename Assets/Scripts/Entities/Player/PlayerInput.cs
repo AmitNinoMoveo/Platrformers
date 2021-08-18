@@ -3,22 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(CharacterController))]
-public class PlayerInput : Entity
+public class PlayerInput : PlayerStats
 {
-    private CharacterController _characterController;
-    public CharacterController CharacterController
+    private float _horizontalInput;
+    public float HorizontalInput
     {
-        get => _characterController;
-        private set
-        {
-            _characterController = value;
-        }
-    }
-    private Vector3 _direction;
-    public Vector3 Direction
-    {
-        get => _direction;
-        private set => _direction = value;
+        get => _horizontalInput;
+        private set => _horizontalInput = value;
     }
     private bool _isSpacePressed;
     public bool IsSpacePressed
@@ -26,14 +17,9 @@ public class PlayerInput : Entity
         get => _isSpacePressed;
         private set => _isSpacePressed = value;
     }
-    public virtual void Start()
-    {
-        CharacterController = GetComponent<CharacterController>();
-    }
-
     public virtual void Update()
     {
-        Direction = new Vector3(Input.GetAxis("Horizontal"), 0, 0);
+        HorizontalInput = Input.GetAxis("Horizontal");
         IsSpacePressed = Input.GetButtonDown("Jump");
     }
 }
