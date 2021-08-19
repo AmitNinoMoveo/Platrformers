@@ -32,6 +32,13 @@ public class PlayerMovement : PlayerInput
         get => _canDoubleJump;
         private set => _canDoubleJump = value;
     }
+    [SerializeField]
+    private Vector3 _startingPoint;
+    public Vector3 StartingPoint
+    {
+        get => _startingPoint;
+        private set => _startingPoint = value;
+    }
     private CharacterController _controller;
     public CharacterController Controller
     {
@@ -49,8 +56,10 @@ public class PlayerMovement : PlayerInput
     }
     private Vector3 _velocity;
     private float _yVelocity;
-    public virtual void Start()
+    public override void Start()
     {
+        base.Start();
+        transform.position = _startingPoint;
         Controller = GetComponent<CharacterController>();
     }
     public override void Update()
@@ -73,7 +82,7 @@ public class PlayerMovement : PlayerInput
         else if (!IsGrounded && IsSpacePressed && CanDoubleJump)
         {
             CanDoubleJump = false;
-            _yVelocity += JumpHeight;
+            _yVelocity = JumpHeight;
         }
         else
         {
