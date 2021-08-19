@@ -12,6 +12,13 @@ public class UIManager : MonoBehaviour
         get => _currentCoinsText;
         private set => _currentCoinsText = value;
     }
+    [SerializeField]
+    private Text _currentLivesText;
+    public Text CurrentLivesText
+    {
+        get => _currentLivesText;
+        private set => _currentLivesText = value;
+    }
     private void Start()
     {
         CurrentCoinsText.text = "Coins: " + 0;
@@ -20,4 +27,9 @@ public class UIManager : MonoBehaviour
     {
         CurrentCoinsText.text = "Coins: " + newCoinsAmount;
     }
+    public void changeLivesText(int newLivesAmount)
+    {
+        CurrentLivesText.text = "Lives: " + newLivesAmount;
+    }
+
 }

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Entity : MonoBehaviour
+public class Entity : Life
 {
     [SerializeField] private float _speed;
     public float Speed
