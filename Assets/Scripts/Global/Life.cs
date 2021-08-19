@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Life : MonoBehaviour
+public class Life : WorldInfo
 {
     [SerializeField]
     private int _maxLife;
@@ -42,11 +42,12 @@ public class Life : MonoBehaviour
     }
     public virtual void Start()
     {
+        IsAlive = true;
         CurrentLife = MaxLife;
     }
     public virtual void changeCurrentLifeAmount(int amount = 1)
     {
-        if (amount >= CurrentLife)
+        if ((amount + CurrentLife) <= 0)
         {
             IsAlive = false;
             CurrentLife = 0;

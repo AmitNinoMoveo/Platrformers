@@ -103,6 +103,33 @@ public class PlayerMovement : PlayerInput
     void Move()
     {
         CalculateMovement();
-        Controller.Move(_velocity * Time.deltaTime);
+        if (!isOutOfBounds()) Controller.Move(_velocity * Time.deltaTime);
+    }
+    bool isOutOfBounds()
+    {
+        float Ypos = transform.position.y;
+        float Xpos = transform.position.x;
+        if (Ypos <= YBottomScreenBorder)
+        {
+            restartTurn();
+            return true;
+        }
+        // else if (
+        //     Ypos >= YTopScreenBorder
+        //     || Xpos <= XLeftScreenBorder
+        //     || Xpos >= XRightScreenBorder
+        // )
+        // {
+        //     return true;
+        // }
+        else
+        {
+            return false;
+        }
+    }
+    void restartTurn()
+    {
+        changeCurrentLifeAmount(-1);
+        transform.position = StartingPoint;
     }
 }

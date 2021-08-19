@@ -6,6 +6,7 @@ using UnityEngine;
 public class PlayerStats : Entity
 {
     private UIManager _uiManager;
+    private GameManager _gameManager;
     [SerializeField]
     private int _coins;
     public int Coins
@@ -18,6 +19,8 @@ public class PlayerStats : Entity
         base.Start();
         _uiManager = GameObject.Find("Canvas").GetComponent<UIManager>();
         if (_uiManager == null) Debug.LogError("PlayerStats::UI Manager is null");
+        _gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        if (_gameManager == null) Debug.LogError("PlayerStats::Game Manager is null");
 
         _uiManager.changeLivesText(CurrentLife);
     }
@@ -29,6 +32,7 @@ public class PlayerStats : Entity
     public override void changeCurrentLifeAmount(int amount = 1)
     {
         base.changeCurrentLifeAmount(amount);
+        if (!IsAlive) _gameManager.setGameOver();
         _uiManager.changeLivesText(CurrentLife);
     }
 }
